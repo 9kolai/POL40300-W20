@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>POL40300: Lecture4</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+		<link rel="stylesheet" href="dist/reveal-override.css"/>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		
+	</head>
+	<body>
+		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="pic/BGMainBlue.gif" style="color:white">
+					<h1  style="color:white">POL40300: Computational Methods</h1>
+					<p>Lecture 4 by Nikolai Gad</p>
+					<p>München, 25. November 2020</p>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Today's lecture </h3>
+					<ul>
+						<li>R packages  </li>
+						<li>Introduction to automated text analysis </li>
+						<ul>
+							<li>Pre-processing text data. </li>
+							<li>Analysing text data. </li>
+							<li>Possibilities and challenges. </li>
+						</ul>
+						<li>String manipulation in R </li>
+						<li>Next week </li>
+						
+					</ul>
+				</section>
+
+				<section>
+					<h3 style="color: rgb(0,101,189)">R packages </h3>
+					<p class="fragment">A way to extend the functionality of R. </p>
+					<p class="fragment">Contains additional functions, data, and more. </p>
+					<p class="fragment">Common distribution channels: </p>
+					<ul>
+						<li class="fragment">CRAN (Comprehensive R Archive Network) </li>
+						<li class="fragment">Github </li>
+					</ul>
+				</section>
+
+
+
+				<section>
+					<h1>Introduction to automated text analysis </h1>
+					<p class="fragment">Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. Political Analysis, 21(3), 267–297.</p>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Steps in automated text analysis. </h3>
+					<ol>
+						<li class="fragment">Collect text data (we will cover this later). </li>
+						<li class="fragment">Pre-processing data (quantifying text). </li>
+						<li class="fragment">Analysing text data. </li>
+						<li class="fragment">(Validate your results)</li>
+					</ol>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Pre-processing text data. </h3>
+					<section>
+						<p>Goal is to quantify text so we can do calculations on it. </p>
+						<p class="fragment">This necessarily involves <em>reducing complexity</em>. </p>
+					</section>
+					<section>
+						<h2>Some terminology: </h2>
+						<ul>
+							<li class="fragment">Document/text: Usually the unit of analysis. </li>
+							<li class="fragment">Corpus: Our sample of units to analyse. </li>
+							<li class="fragment">Features/tokens: The entity we use to quantify our texts (most often words.) </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Bag of words (unigrams) </h2>
+						<p class="fragment">We discard the word order in each text completely and only look at which words are used and how often in each text. </p>
+						<p class="fragment">We also call this <em>tokenising</em>. </p>
+						<p class="fragment">Improve unigrams by using bigrams, trigrams, or n-grams. </p>
+						<p class="fragment">More advanced text analysis methods exist, but we will not cover that in this class. </p>
+					</section>
+					<section>
+						<p>The result of this is a </p>
+						<h2>Document-term matrix. </h2>
+						<p>Also known as a document-feature-matrix</p>
+						<p class="fragment">Additional preprossing: </p>
+						<ul>
+							<li class="fragment">Stemming (or more advanced lematisation) </li>
+							<li class="fragment">Removing stop words, punctuation, and rare words. </li>
+							<li class="fragment">Remove capitalisation. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>document-term-matrix</h3>
+						
+					</section>
+				</section>
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Analysing text data. </h3>
+					<section>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th colspan="2" style="text-align: center;">Scale</th>
+								</tr>
+								<tr>
+									<th></th>
+									<th>Categorical</th>
+									<th>Continuous (scaling)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Supervised </th>
+									<td>Classification (known categories) </td>
+									<td>Scaling (known scale) </td>
+								</tr>
+								<tr>
+									<th>Unsupervised </th>
+									<td>Clustering (unkown categories) </td>
+									<td>Exploring dimensions (unknown scale) </td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Classifying documents into known categories </h3>
+						<p class="fragment">Goal: Either categorise individual documents or assess overall distribution of documents in each category. </p>
+						<ul>
+							<li class="fragment">Dictionary methods </li>
+							<li class="fragment">Supervised ML </li>
+						</ul>
+						<p class="fragment">Validation, relatively straight forward. </p>
+					</section>
+					<section>
+						<h3>Discovering categories and topics </h3>
+						<p>Clustering data - unsupervised methods </p>
+						<ul>
+							<li class="fragment">FAC (fully automated clustering) </li>
+							<li class="fragment">CAC (computer assisted clustering) </li>
+						</ul>
+						<p class="fragment">Challenge to choose number of clusters. </p>
+						<p class="fragment">And challenge to validate clusters: </p>
+						<ul>
+							<li class="fragment">Semantic validation </li>
+							<li class="fragment">Predictive validation </li>
+							<li class="fragment">Convergent validation </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Scaling political actors </h3>
+						<p>Continuous (nummeric) response variable. </p>
+						<p class="fragment">Goal should be to score actors (or objects) on a political dimension that is useful to our analysis. </p>
+						<p class="fragment">So the goal is <em>not</em> to prefectly model the text. </p>
+						<ul>
+							<li class="fragment">Supervised scaling: fx. Wordscores.  </li>
+							<li class="fragment">Unsupervised scaling: fx. wordfish. </li>
+						</ul>
+						<p class="fragment">General challenge is an asssumption about ideological dominance.</p>
+					</section>
+				
+				</section>
+					
+				<section>
+					<h3 style="color: rgb(0,101,189)">Possibilities with computational text analysis </h3>
+					<p class="fragment">Four principles of automated text analysis: </p>
+					<ol>
+						<li class="fragment">All quantitative models of language are wrong - but some are useful. </li>
+						<li class="fragment">Quantitative models for text amplify resources and augment humans. </li>
+						<li class="fragment">There is no globally best method for automated text analysis. </li>
+						<li class="fragment">Validate, validate, validate! </li>
+					</ol>
+					<p class="fragment">Do you agree with these principles? </p>
+				</section>
+
+				
+				<section>
+					<h1>String manipulation in R</h1>
+					
+					<p class="fragment">Tomorrow's exercise will introduce the stringR package</p>
+					<p class="fragment">Help us with very basic string manipulation. </p>
+					<p class="fragment">Standardised functions for a lot of the procedures talked about today. </p>
+					<h3 class="fragment">But...</h3>
+					<p class="fragment">Good to know basics: </p>
+					<ul>
+							<li class="fragment">Better understanding of what is going on. </li>
+							<li class="fragment">Enable you to do things exactly the way you want to. </li>
+							<li class="fragment">It might be part of your exam. </li>
+					</ul>
+				</section>
+				
+
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Next week: An example of research that use computational text analysis. </h3>
+				</section>
+
+				
+				
+			</div>
+		</div>
+		
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
