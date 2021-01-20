@@ -14,6 +14,117 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 		
+		<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load Charts and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart for Sarah's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawSarahChart);
+
+      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawAnthonyChart);
+
+      // Callback that draws the pie chart for Sarah's pizza.
+      function drawSarahChart() {
+
+        // Create the data table for Sarah's pizza.
+        var cons = 1;
+        var lab = 1; 
+        var lib = 1;
+        var green = 1; 
+        var ukip = 1; 
+        var snp = 1;
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Party');
+        data.addColumn('number', 'Votes');
+        data.addRows([
+          ['Orange = CDU/CSU', cons],
+          ['Red = SPD', lab],
+          ['Yellow = FDP', lib],
+          ['Green = Grünen', green],
+          ['5 = AfP', ukip], 
+          ['Purple = Die Linke', snp]
+        ]);
+
+        // Set options for Sarah's pie chart.
+        var options = {'title':'How many people voted for each party?',
+                       'width':1000,
+                       'height':500, 
+                       'animation':{
+                            'duration':500, 
+                            'easing': 'out',}, 
+                       'vAxis':{
+//                            'minValue':0,
+                            'viewWindow':{
+                                'min':0,},
+//                            'viewWindowMode':'maximized',
+                            },
+                       };
+
+        // Instantiate and draw the chart for Sarah's pizza.
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+        function selectHandler() {
+          var selectedItem = chart.getSelection()[0];
+          if (selectedItem) {
+            var party = data.getValue(selectedItem.row, 0);
+            var vote = data.getValue(selectedItem.row, 1);
+            data.setValue(selectedItem.row, 1, vote+1);
+	        
+//            if (party == '1 = Conservative') {
+//            	cons +=1;
+//	        alert('The user selected ' + party + cons );
+//	        data.setValue(selectedItem.row, 1, vote+1);
+//	    }
+//	    else if (party == '2 = Labour') {
+//	    }
+            chart.draw(data, options);
+          }
+        }
+        google.visualization.events.addListener(chart, 'select', selectHandler); 
+        chart.draw(data, options);
+      }
+
+      // Callback that draws the pie chart for Anthony's pizza.
+      function drawAnthonyChart() {
+
+        // Create the data table for Anthony's pizza.
+       var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Party');
+        data.addColumn('number', 'Votes');
+        data.addRows([
+          ['Orange = CDU/CSU', 990],
+          ['Red = SPD', 3],
+          ['Yellow = FDP', 1],
+          ['Green = Grünen', 1],
+          ['5 = AfP', 3], 
+          ['Purple = Die Linke', 2]
+        ]);
+
+        // Set options for Anthony's pie chart.
+        var options = {'title':'How many people voted for each party?',
+                       'width':1000,
+                       'height':500, 
+                       'animation':{
+                            'duration':500, 
+                            'easing': 'out',}, 
+                       'vAxis':{
+//                            'minValue':0,
+                            'viewWindow':{
+                                'min':0,},
+//                            'viewWindowMode':'maximized',
+                            },
+                       };
+
+        // Instantiate and draw the chart for Anthony's pizza.
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart-ex_div'));
+        chart.draw(data, options);
+      }
+    </script>
+		
 	</head>
 	<body>
 		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
